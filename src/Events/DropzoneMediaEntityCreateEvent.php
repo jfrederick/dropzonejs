@@ -2,7 +2,7 @@
 
 namespace Drupal\dropzonejs\Events;
 
-use Drupal\Core\Form\FormState;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\media_entity\MediaInterface;
 use Symfony\Component\EventDispatcher\Event;
@@ -19,12 +19,12 @@ class DropzoneMediaEntityCreateEvent extends Event {
 
   protected $file;
 
-  public function __construct(MediaInterface $media_entity, $element, $form, FormState $form_state, File $file) {
+  public function __construct(MediaInterface $media_entity, File $file, $form, FormStateInterface $form_state, $element) {
     $this->mediaEntity = $media_entity;
-    $this->element = $element;
+    $this->file = $file;
     $this->form = $form;
     $this->formState = $form_state;
-    $this->file = $file;
+    $this->element = $element;
   }
 
   public function __get($name) {
